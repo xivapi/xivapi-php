@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+// composer auto loader
+require __DIR__ . '/vendor/autoload.php';
+
+$option = isset($argv[1]) ? trim($argv[1]) : false;
+$arg1   = isset($argv[2]) ? trim($argv[2]) : false;
+
+// setup xivapi
+$api = new \XIVAPI\XIVAPI();
+
+// set env key
+$api->environment->key('my_api_key');
+
+// do commands
+$results = $api->search->find('fire shard')->results();
+
+print_r($results);

@@ -2,14 +2,19 @@
 
 namespace XIVAPI;
 
-use XIVAPI\Services\Content;
+use XIVAPI\Api\Search;
+use XIVAPI\Common\Environment;
 
 class XIVAPI
 {
-    public $content;
+    /** @var Environment */
+    public $environment;
+    /** @var Search */
+    public $search;
 
     public function __construct()
     {
-        $this->content = new Content();
+        $this->environment = new Environment();
+        $this->search = new Search();
     }
 }

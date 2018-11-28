@@ -4,6 +4,8 @@ namespace XIVAPI\Guzzle;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\RequestOptions;
+use XIVAPI\Common\Environment;
 
 class Guzzle
 {
@@ -14,6 +16,10 @@ class Guzzle
 
     public function query($method, $apiEndpoint, $options = [])
     {
+        if ($key = getenv(Environment::XIVAPI_KEY)) {
+            $options[RequestOptions::QUERY]['key'] = $key;
+        }
+
         $client = new Client([
             'base_uri'  => self::ENDPOINT_PROD,
             'timeout'   => self::TIMEOUT,
