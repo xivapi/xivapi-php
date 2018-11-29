@@ -95,7 +95,7 @@ $api->content->serversByDataCenter();
 $api->search->find($string)->results();
 ```
 
-The following search modify methods are available:
+Search modification methods are:
 ```php
 $api->search->column($column);
 $api->search->algorithm($searchStringAlgorithm);
