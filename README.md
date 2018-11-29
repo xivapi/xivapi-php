@@ -6,7 +6,7 @@ This provides a very simple client to interact with the XIVAPI and obtain dynami
 
 This library requires PHP 7.2+
 
-Install vis composer:
+Install vis composer: https://packagist.org/packages/xivapi/xivapi-php
 
 - `composer require xivapi/xivapi-php`
 
@@ -31,7 +31,7 @@ $api->environment->key('my_api_key');
 
 The following global queries are supported:
 
-- `columns`
+#### `columns`
 
 ```php
 $columns = [
@@ -43,19 +43,19 @@ $columns = [
 $api->columns($columns)->content->Item()->list();
 ```
 
-- `language`
+#### `language`
 
 ```php
 $api->language('en')->content->Item()->list();
 ```
 
-- `snake_case`
+#### `snake_case`
 
 ```php
 $api->snakeCase()->content->Item()->list();
 ```
 
-- `tags`
+#### `tags`
 
 ```php
 $tags = [
@@ -68,7 +68,7 @@ $api->tags($tags)->content->Item()->list();
 
 ### Content
 
-Content is dynamically driven based on what content is available in the game files, thus it has a method method for invoking the different types, eg:
+Content is dynamically driven based on what content is available in the game files using magic methods for invoking the different types, eg:
 
 - `item()`
 - `instanceContent()`
@@ -78,6 +78,7 @@ Content is dynamically driven based on what content is available in the game fil
 $api->content->[contentName]()->list();
 $api->content->[contentName]()->one($id);
 
+// non dynamic methods:
 $api->content->list();
 $api->content->servers();
 $api->content->serversByDataCenter();
