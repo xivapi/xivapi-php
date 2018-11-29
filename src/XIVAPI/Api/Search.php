@@ -55,7 +55,7 @@ class Search
         return $this;
     }
 
-    public function findColumn(string $column): Search
+    public function column(string $column): Search
     {
         $this->options->string_column = trim($column);
         return $this;
