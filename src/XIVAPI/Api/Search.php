@@ -5,10 +5,8 @@ namespace XIVAPI\Api;
 use GuzzleHttp\RequestOptions;
 use XIVAPI\Guzzle\Guzzle;
 
-class Search extends Guzzle
+class Search
 {
-    const ENDPOINT = '/search';
-
     private $options = [
         'indexes'       => null,
         'string'        => null,
@@ -42,7 +40,7 @@ class Search extends Guzzle
             $options[RequestOptions::QUERY][$field] = $value;
         }
 
-        return $this->get(self::ENDPOINT, $options);
+        return Guzzle::get('/search', $options);
     }
 
     public function indexes(array $indexes): Search

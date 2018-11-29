@@ -12,7 +12,12 @@ $api = new \XIVAPI\XIVAPI();
 // set env key
 $api->environment->key('my_api_key');
 
+$columns = [
+    'ID',
+    'Name'
+];
+
 // do commands
-$results = $api->search->find('fire shard')->results();
+$results = $api->columns($columns)->content->Item()->list();
 
 print_r($results);

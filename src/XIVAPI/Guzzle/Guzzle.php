@@ -14,10 +14,31 @@ class Guzzle
     const TIMEOUT = 10.0;
     const VERIFY = false;
 
-    public function query($method, $apiEndpoint, $options = [])
+    private static $columns = [];
+    private static $language = null;
+    private static $snakeCase = false;
+    private static $tags = [];
+
+    public static function query($method, $apiEndpoint, $options = [])
     {
         if ($key = getenv(Environment::XIVAPI_KEY)) {
             $options[RequestOptions::QUERY]['key'] = $key;
+        }
+
+        if (self::$columns) {
+            $options[RequestOptions::QUERY]['columns'] = implode(',', self::$columns);
+        }
+
+        if (self::$language) {
+            $options[RequestOptions::QUERY]['language'] = self::$language;
+        }
+
+        if (self::$snakeCase) {
+            $options[RequestOptions::QUERY]['snake_case'] = 1;
+        }
+
+        if (self::$tags) {
+            $options[RequestOptions::QUERY]['tags'] = implode(',', self::$tags);
         }
 
         $client = new Client([
@@ -36,23 +57,43 @@ class Guzzle
         }
     }
 
-    public function get($apiEndpoint, $options = [])
+    public static function setColumns($columns)
     {
-        return $this->query('GET', $apiEndpoint, $options);
+        self::$columns = $columns;
     }
 
-    public function post($apiEndpoint, $options = [])
+    public static function setLanguage($language)
     {
-        return $this->query('POST', $apiEndpoint, $options);
+        self::$language = $language;
     }
 
-    public function put($apiEndpoint, $options = [])
+    public static function setSnakeCase()
     {
-        return $this->query('PUT', $apiEndpoint, $options);
+        self::$snakeCase = true;
     }
 
-    public function delete($apiEndpoint, $options = [])
+    public static function setTags($tags)
     {
-        return $this->query('DELETE', $apiEndpoint, $options);
+        self::$tags = $tags;
+    }
+
+    public static function get($apiEndpoint, $options = [])
+    {
+        return self::query('GET', $apiEndpoint, $options);
+    }
+
+    public static function post($apiEndpoint, $options = [])
+    {
+        return self::query('POST', $apiEndpoint, $options);
+    }
+
+    public static function put($apiEndpoint, $options = [])
+    {
+        return self::query('PUT', $apiEndpoint, $options);
+    }
+
+    public static function delete($apiEndpoint, $options = [])
+    {
+        return self::query('DELETE', $apiEndpoint, $options);
     }
 }
