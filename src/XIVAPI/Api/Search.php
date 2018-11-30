@@ -100,7 +100,7 @@ class Search
 
     public function filter(string $field, $value, string $operand): Search
     {
-        $this->options->filters[] = "${field}{$operand}{$value}";
+        $this->options->filters[] = "{$field}{$operand}{$value}";
         return $this;
     }
 }
