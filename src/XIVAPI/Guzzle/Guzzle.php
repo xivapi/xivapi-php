@@ -3,7 +3,6 @@
 namespace XIVAPI\Guzzle;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\RequestOptions;
 use XIVAPI\Common\Environment;
 
@@ -14,10 +13,7 @@ class Guzzle
     const TIMEOUT = 10.0;
     const VERIFY = false;
 
-    private static $columns = [];
-    private static $language = null;
-    private static $snakeCase = false;
-    private static $tags = [];
+    private static $options = [];
 
     public static function query($method, $apiEndpoint, $options = [])
     {
@@ -25,20 +21,9 @@ class Guzzle
             $options[RequestOptions::QUERY]['key'] = $key;
         }
 
-        if (self::$columns) {
-            $options[RequestOptions::QUERY]['columns'] = implode(',', self::$columns);
-        }
-
-        if (self::$language) {
-            $options[RequestOptions::QUERY]['language'] = self::$language;
-        }
-
-        if (self::$snakeCase) {
-            $options[RequestOptions::QUERY]['snake_case'] = 1;
-        }
-
-        if (self::$tags) {
-            $options[RequestOptions::QUERY]['tags'] = implode(',', self::$tags);
+        foreach (self::$options as $query => $value) {
+            $value = is_array($value) ? implode(',', $value) : $value;
+            $options[RequestOptions::QUERY][$query] = $value;
         }
 
         $client = new Client([
@@ -47,34 +32,14 @@ class Guzzle
             'verify'    => self::VERIFY,
         ]);
 
-        try {
-            return \GuzzleHttp\json_decode(
-                $client->request($method, $apiEndpoint, $options)->getBody()
-            );
-        } catch (ClientException $ex) {
-            // todo - handle exception
-            $response = $ex->getResponse();
-        }
+        return \GuzzleHttp\json_decode(
+            $client->request($method, $apiEndpoint, $options)->getBody()
+        );
     }
 
-    public static function setColumns($columns)
+    public static function setQuery(string $query, $value)
     {
-        self::$columns = $columns;
-    }
-
-    public static function setLanguage($language)
-    {
-        self::$language = $language;
-    }
-
-    public static function setSnakeCase()
-    {
-        self::$snakeCase = true;
-    }
-
-    public static function setTags($tags)
-    {
-        self::$tags = $tags;
+        self::$options[$query] = $value;
     }
 
     public static function get($apiEndpoint, $options = [])

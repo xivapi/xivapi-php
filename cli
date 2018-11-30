@@ -12,12 +12,15 @@ $api = new \XIVAPI\XIVAPI();
 // set env key
 $api->environment->key('my_api_key');
 
-$columns = [
-    'ID',
-    'Name'
+$queries = [
+    'limit' => 500,
+    'columns' => [
+        'ID',
+        'Name'
+    ]
 ];
 
 // do commands
-$results = $api->columns($columns)->content->Item()->list();
+$results = $api->queries($queries)->content->Item()->list();
 
 print_r($results);

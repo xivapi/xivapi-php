@@ -27,44 +27,17 @@ You can set the environment variable: `XIVAPI_KEY` Or via:
 $api->environment->key('my_api_key');
 ```
 
-**Using global queries**
+**Using Queries (excludes Search)**
 
-The following global queries are supported:
+The API has a whole host of queries to allow you to customise the response, these are all passed to the API before you request data. Search has some extra queries that are hard coded as these interact with Elastic Search.
 
-#### `columns`
-
-```php
-$columns = [
-    'ID',
-    'Name',
-    'Icon
-];
-
-$api->columns($columns)->content->Item()->list();
-```
-
-#### `language`
-
-```php
-$api->language('en')->content->Item()->list();
-```
-
-#### `snake_case`
-
-```php
-$api->snakeCase()->content->Item()->list();
-```
-
-#### `tags`
-
-```php
-$tags = [
-    'one',
-    'two',
-    'three'
-];
-$api->tags($tags)->content->Item()->list();
-```
+- `limit=250` - https://xivapi.com/docs/Content#limit
+- `ids=1,4,8,20` - https://xivapi.com/docs/Content#ids
+- `minify=1` - https://xivapi.com/docs/Content#minify
+- `language=en` - https://xivapi.com/docs/Welcome#language
+- `snake_case` - https://xivapi.com/docs/Welcome#snake_case
+- `columns` - https://xivapi.com/docs/Welcome#columns
+- `tags` - https://xivapi.com/docs/Welcome#tags
 
 ### Content
 

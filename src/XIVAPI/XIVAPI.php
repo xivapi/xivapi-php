@@ -51,27 +51,12 @@ class XIVAPI
         $this->patchlist    = new PatchList();
     }
 
-    public function columns($columns): XIVAPI
+    public function queries($queries): XIVAPI
     {
-        Guzzle::setColumns($columns);
-        return $this;
-    }
+        foreach ($queries as $query => $value) {
+            Guzzle::setQuery($query, $value);
+        }
 
-    public function language($language): XIVAPI
-    {
-        Guzzle::setLanguage($language);
-        return $this;
-    }
-
-    public function snakeCase(): XIVAPI
-    {
-        Guzzle::setSnakeCase();
-        return $this;
-    }
-
-    public function tags($tags): XIVAPI
-    {
-        Guzzle::setTags($tags);
         return $this;
     }
 }

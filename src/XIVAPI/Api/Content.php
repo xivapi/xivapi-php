@@ -459,7 +459,7 @@ class Content
         return (new ContentHandler())->setContentName($name);
     }
 
-    public function list(): array
+    public function list($options = []): array
     {
         return Guzzle::get('/content');
     }
