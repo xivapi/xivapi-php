@@ -55,13 +55,13 @@ class Search
         return $this;
     }
 
-    public function column(string $column): Search
+    public function findColumn(string $column): Search
     {
         $this->options->string_column = trim($column);
         return $this;
     }
 
-    public function algorithm(string $searchStringAlgorithm): Search
+    public function findAlgorithm(string $searchStringAlgorithm): Search
     {
         $this->options->string_algo = trim($searchStringAlgorithm);
         return $this;

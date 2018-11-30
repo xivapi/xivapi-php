@@ -70,12 +70,25 @@ $api->search->find($string)->results();
 
 Search modification methods are:
 ```php
-$api->search->column($column);
-$api->search->algorithm($searchStringAlgorithm);
+// The column to search on
+$api->search->findColumn($column);
+
+// the algorithm to use
+$api->search->findAlgorithm($searchStringAlgorithm);
+
+// the page to start on
 $api->search->page($number);
+
+// sorting order
 $api->search->sort($field, $order);
+
+// limit results
 $api->search->limit($limit);
+
+// columns in the results
 $api->search->columns($columns);
+
+// change elastics filter bool condition (eg: should, must, must_not)
 $api->search->bool($bool);
 ```
 
