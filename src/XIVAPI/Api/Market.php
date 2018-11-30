@@ -29,7 +29,7 @@ class Market
 
     public function tokens($password)
     {
-        return Guzzle::get("/market/categories", [
+        return Guzzle::get("/companion/tokens", [
             RequestOptions::QUERY => [
                 'password' => $password
             ]
