@@ -36,7 +36,12 @@ class Guzzle
             $client->request($method, $apiEndpoint, $options)->getBody()
         );
     }
-
+    
+    public static function resetQuery()
+    {
+        self::$options = [];
+    }
+    
     public static function setQuery(string $query, $value)
     {
         self::$options[$query] = $value;

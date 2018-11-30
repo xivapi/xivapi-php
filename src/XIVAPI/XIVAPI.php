@@ -53,6 +53,8 @@ class XIVAPI
 
     public function queries($queries): XIVAPI
     {
+        Guzzle::resetQuery();
+        
         foreach ($queries as $query => $value) {
             Guzzle::setQuery($query, $value);
         }
