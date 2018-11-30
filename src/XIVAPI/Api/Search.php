@@ -37,6 +37,7 @@ class Search
                 continue;
             }
 
+            $value = is_array($value) ? implode(',', $value) : $value;
             $options[RequestOptions::QUERY][$field] = $value;
         }
 

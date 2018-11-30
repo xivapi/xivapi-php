@@ -12,15 +12,12 @@ $api = new \XIVAPI\XIVAPI();
 // set env key
 $api->environment->key('my_api_key');
 
-$queries = [
-    'limit' => 500,
-    'columns' => [
-        'ID',
-        'Name'
-    ]
-];
+$items = $api->search
+    ->indexes(['item'])
+    ->filter('ItemSearchCategory.ID', 10, \XIVAPI\Api\SearchFilters::EQUAL_TO)
+    ->limit(500)
+    ->sort('LevelItem', 'desc')
+    ->columns(['ID','Name'])
+    ->results();
 
-// do commands
-$results = $api->queries($queries)->content->Item()->list();
-
-print_r($results);
+print_r($items);
