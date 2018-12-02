@@ -2,6 +2,7 @@
 
 namespace XIVAPI;
 
+use GuzzleHttp\Psr7\Response;
 use XIVAPI\Api\Character;
 use XIVAPI\Api\FreeCompany;
 use XIVAPI\Api\Linkshell;
@@ -49,6 +50,35 @@ class XIVAPI
         $this->lodestone    = new Lodestone();
         $this->market       = new Market();
         $this->patchlist    = new PatchList();
+    }
+    
+    public function reset(): XIVAPI
+    {
+        Guzzle::resetQuery();
+        return $this;
+    }
+    
+    public function async(): XIVAPI
+    {
+        Guzzle::setAsync();
+        return $this;
+    }
+    
+    public function unwrap($results): \stdClass
+    {
+        $unwrapped = (Object)[];
+        foreach ($results as $key => $response) {
+            /** @var Response $response */
+            $response = $response['value'] ?? false;
+            
+            if ($response) {
+                $response = \GuzzleHttp\json_decode($response->getBody());
+            }
+            
+            $unwrapped->{$key} = $response;
+        }
+        
+        return $unwrapped;
     }
 
     public function queries($queries): XIVAPI

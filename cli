@@ -8,16 +8,20 @@ $arg1   = isset($argv[2]) ? trim($argv[2]) : false;
 
 // setup xivapi
 $api = new \XIVAPI\XIVAPI();
+$api->environment->key('');
 
-// set env key
-$api->environment->key('my_api_key');
+// using concurrent
+use GuzzleHttp\Promise;
 
-$items = $api->search
-    ->indexes(['item'])
-    ->filter('ItemSearchCategory.ID', 10, \XIVAPI\Api\SearchFilters::EQUAL_TO)
-    ->limit(500)
-    ->sort('LevelItem', 'desc')
-    ->columns(['ID','Name'])
-    ->results();
+$promises = [
+    'item1' => $api->async()->content->Item()->one(1675),
+    'item2' => $api->async()->content->Item()->one(5),
+    'item3' => $api->async()->content->Item()->one(2546),
+];
 
-print_r($items);
+$results = Promise\settle($promises)->wait();
+$items = $api->unwrap($results);
+
+print_r( $items->item1->Name . PHP_EOL);
+print_r( $items->item2->Name . PHP_EOL);
+print_r( $items->item3->Name . PHP_EOL);

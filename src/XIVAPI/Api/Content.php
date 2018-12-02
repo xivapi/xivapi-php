@@ -469,7 +469,7 @@ class Content
         return Guzzle::get('/servers');
     }
 
-    public function serversByDataCenter(): array
+    public function serversByDataCenter(): \stdClass
     {
         return Guzzle::get('/servers/dc');
     }
