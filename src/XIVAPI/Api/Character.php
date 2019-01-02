@@ -9,7 +9,7 @@ class Character
 {
     public function search(string $name, string $server, int $page = 1)
     {
-        return Guzzle::get("/freecompany/search", [
+        return Guzzle::get("/character/search", [
             RequestOptions::QUERY => [
                 'name'   => $name,
                 'server' => ucwords($server),
