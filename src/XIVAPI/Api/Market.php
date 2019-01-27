@@ -7,11 +7,22 @@ use XIVAPI\Guzzle\Guzzle;
 
 class Market
 {
+    public function get(string $server, int $itemId)
+    {
+        return Guzzle::get("/market/{$server}/item/{$itemId}");
+    }
+    
+    /**
+     * @deprecated - use "get"
+     */
     public function price(string $server, int $itemId)
     {
         return Guzzle::get("/market/{$server}/items/{$itemId}");
     }
-
+    
+    /**
+     * @deprecated - use "get"
+     */
     public function history(string $server, int $itemId)
     {
         return Guzzle::get("/market/{$server}/items/{$itemId}/history");
