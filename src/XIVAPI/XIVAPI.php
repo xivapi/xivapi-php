@@ -19,7 +19,7 @@ class XIVAPI
 {
     const PROD    = 'https://xivapi.com';
     const STAGING = 'https://staging.xivapi.com';
-    const DEV     = 'https://xivapi.local';
+    const DEV     = 'http://xivapi.local';
     
     /** @var Environment */
     public $environment;
