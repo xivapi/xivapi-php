@@ -17,6 +17,10 @@ use XIVAPI\Guzzle\Guzzle;
 
 class XIVAPI
 {
+    const PROD    = 'https://xivapi.com';
+    const STAGING = 'https://staging.xivapi.com';
+    const DEV     = 'https://xivapi.local';
+    
     /** @var Environment */
     public $environment;
     /** @var Search */
@@ -38,8 +42,11 @@ class XIVAPI
     /** @var PatchList */
     public $patchlist;
 
-    public function __construct()
+    public function __construct(string $environment = self::PROD)
     {
+        // set environment to use
+        Guzzle::setEnvironment($environment);
+        
         $this->environment  = new Environment();
         $this->search       = new Search();
         $this->content      = new Content();

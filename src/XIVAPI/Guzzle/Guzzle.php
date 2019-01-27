@@ -8,8 +8,6 @@ use XIVAPI\Common\Environment;
 
 class Guzzle
 {
-    const ENDPOINT_PROD = 'https://xivapi.com';
-    const ENDPOINT_DEV  = 'https://xivapi.local';
     const TIMEOUT = 10.0;
     const VERIFY = false;
     
@@ -17,6 +15,8 @@ class Guzzle
     private static $client = null;
     /** @var bool */
     private static $async = false;
+    /** @var string */
+    private static $environment = null;
     /** @var array */
     private static $options = [];
     
@@ -27,11 +27,16 @@ class Guzzle
     {
         if (self::$client === null) {
             self::$client = new Client([
-                'base_uri'  => self::ENDPOINT_PROD,
+                'base_uri'  => self::$environment,
                 'timeout'   => self::TIMEOUT,
                 'verify'    => self::VERIFY,
             ]);
         }
+    }
+    
+    public static function setEnvironment(string $environment): void
+    {
+        self::$environment = $environment;
     }
 
     public static function query($method, $apiEndpoint, $options = [])
