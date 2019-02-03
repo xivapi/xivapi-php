@@ -1,7 +1,7 @@
 {
     "name": "xivapi/xivapi-php",
     "type": "library",
-    "keywords": ["ffxiv","php","api","sdk"],
+    "keywords": ["ffxiv", "php", "api", "sdk"],
     "description": "A PHP SDK for xivapi.com",
     "homepage": "https://github.com/xivapi/xivapi-php",
     "license": "MIT",
@@ -15,10 +15,10 @@
     ],
     "require": {
         "php": "^7.2",
-        "guzzlehttp/guzzle": "^6.3",
-        "phpunit/phpunit": "6.5.11"
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
+        "phpunit/phpunit": "~6.0"
     },
     "autoload": {
         "psr-0": {
