@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+// composer auto loader
+require __DIR__ . '/vendor/autoload.php';
+
+$option = isset($argv[1]) ? trim($argv[1]) : false;
+$arg1   = isset($argv[2]) ? trim($argv[2]) : false;
+
+// setup xivapi
+$api = new \XIVAPI\XIVAPI();
+$api->environment->key('');
+
+// using concurrent
+use GuzzleHttp\Promise;
+
+$promises = [
+    'item1' => $api->async()->content->Item()->one(1675),
+    'item2' => $api->async()->content->Item()->one(5),
+    'item3' => $api->async()->content->Item()->one(2546),
+];
+
+$results = Promise\settle($promises)->wait();
+$items = $api->unwrap($results);
+
+print_r( $items->item1->Name . PHP_EOL);
+print_r( $items->item2->Name . PHP_EOL);
+print_r( $items->item3->Name . PHP_EOL);
