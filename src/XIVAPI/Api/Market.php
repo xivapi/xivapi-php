@@ -7,43 +7,31 @@ use XIVAPI\Guzzle\Guzzle;
 
 class Market
 {
-    public function get(string $server, int $itemId)
+    public function getServer(string $server, int $itemId)
     {
         return Guzzle::get("/market/{$server}/item/{$itemId}");
     }
     
-    /**
-     * @deprecated - use "get"
-     */
-    public function price(string $server, int $itemId)
+    public function getServers(array $servers, int $itemId)
     {
-        return Guzzle::get("/market/{$server}/items/{$itemId}");
+        return Guzzle::get("/market/item/{$itemId}", [
+            RequestOptions::QUERY => [
+                'servers' => implode(',', $servers)
+            ]
+        ]);
     }
     
-    /**
-     * @deprecated - use "get"
-     */
-    public function history(string $server, int $itemId)
+    public function getDataCenter(string $dc, int $itemId)
     {
-        return Guzzle::get("/market/{$server}/items/{$itemId}/history");
-    }
-
-    public function stock(string $server, int $categoryId)
-    {
-        return Guzzle::get("/market/{$server}/category/{$categoryId}");
+        return Guzzle::get("/market/item/{$itemId}", [
+            RequestOptions::QUERY => [
+                'dc' => $dc
+            ]
+        ]);
     }
 
     public function categories()
     {
         return Guzzle::get("/market/categories");
-    }
-
-    public function tokens($password)
-    {
-        return Guzzle::get("/companion/tokens", [
-            RequestOptions::QUERY => [
-                'password' => $password
-            ]
-        ]);
     }
 }
