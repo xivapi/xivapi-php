@@ -45,7 +45,7 @@ class Guzzle
         
         // set XIVAPI key
         if ($key = getenv(Environment::XIVAPI_KEY)) {
-            $options[RequestOptions::QUERY]['key'] = $key;
+            $options[RequestOptions::QUERY]['private_key'] = $key;
         }
 
         // set request queries
