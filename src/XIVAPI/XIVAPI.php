@@ -12,6 +12,7 @@ use XIVAPI\Api\PatchList;
 use XIVAPI\Api\PvPTeam;
 use XIVAPI\Api\Search;
 use XIVAPI\Api\Content;
+use XIVAPI\Api\Url;
 use XIVAPI\Common\Environment;
 use XIVAPI\Guzzle\Guzzle;
 
@@ -23,6 +24,8 @@ class XIVAPI
     
     /** @var Environment */
     public $environment;
+    /** @var Url */
+    public $url;
     /** @var Search */
     public $search;
     /** @var Content */
@@ -46,8 +49,9 @@ class XIVAPI
     {
         // set environment to use
         Guzzle::setEnvironment($environment);
-        
+
         $this->environment  = new Environment();
+        $this->url          = new Url();
         $this->search       = new Search();
         $this->content      = new Content();
         $this->character    = new Character();

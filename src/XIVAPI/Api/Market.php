@@ -7,26 +7,27 @@ use XIVAPI\Guzzle\Guzzle;
 
 class Market
 {
-    public function getServer(string $server, int $itemId)
+    public function item(int $itemId, array $servers = [], string $dc = '')
     {
-        return Guzzle::get("/market/{$server}/item/{$itemId}");
-    }
-    
-    public function getServers(array $servers, int $itemId)
-    {
+        $options = [];
+
+        if ($servers) {
+            $options['servers'] = implode(',', $servers);
+        }
+
+        if ($dc) {
+            $options['dc'] = $dc
+        }
+
         return Guzzle::get("/market/item/{$itemId}", [
-            RequestOptions::QUERY => [
-                'servers' => implode(',', $servers)
-            ]
+            RequestOptions::QUERY => $options
         ]);
     }
-    
-    public function getDataCenter(string $dc, int $itemId)
+
+    public function search($elasticQuery)
     {
-        return Guzzle::get("/market/item/{$itemId}", [
-            RequestOptions::QUERY => [
-                'dc' => $dc
-            ]
+        return Guzzle::get("/market/search", [
+            RequestOptions::JSON => $elasticQuery
         ]);
     }
 
@@ -34,4 +35,39 @@ class Market
     {
         return Guzzle::get("/market/categories");
     }
+
+
+    public function itemPrices(string $accessKey, int $itemId, string $server)
+    {
+        return Guzzle::get("/private/market/item", [
+            RequestOptions::QUERY => [
+                'companion_access_key' => $accessKey,
+                'item_id'   => $itemId,
+                'server'    => $server,
+            ]
+        ]);
+    }
+
+    public function itemHistory(string $accessKey, int $itemId, string $server)
+    {
+        return Guzzle::get("/private/market/item/history", [
+            RequestOptions::QUERY => [
+                'companion_access_key' => $accessKey,
+                'item_id'   => $itemId,
+                'server'    => $server,
+            ]
+        ]);
+    }
+
+    public function manualUpdateItem(string $accessKey, int $itemId, string $server)
+    {
+        return Guzzle::get("/private/market/item/update", [
+            RequestOptions::QUERY => [
+                'companion_access_key' => $accessKey,
+                'item_id'   => $itemId,
+                'server'    => $server,
+            ]
+        ]);
+    }
+
 }
