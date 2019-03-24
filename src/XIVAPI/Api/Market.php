@@ -16,7 +16,7 @@ class Market
         }
 
         if ($dc) {
-            $options['dc'] = $dc
+            $options['dc'] = $dc;
         }
 
         return Guzzle::get("/market/item/{$itemId}", [
