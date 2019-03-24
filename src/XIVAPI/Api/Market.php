@@ -16,7 +16,11 @@ class Market
         }
 
         if ($dc) {
-            $options['dc'] = $dc
+            $options['dc'] = $dc;
+        }
+        
+        if (empty($servers) && empty($dc)) {
+            throw new \Exception('You must provide either a list of servers or a DC name');
         }
 
         return Guzzle::get("/market/item/{$itemId}", [
@@ -36,14 +40,13 @@ class Market
         return Guzzle::get("/market/categories");
     }
 
-
     public function itemPrices(string $accessKey, int $itemId, string $server)
     {
         return Guzzle::get("/private/market/item", [
             RequestOptions::QUERY => [
                 'companion_access_key' => $accessKey,
-                'item_id'   => $itemId,
-                'server'    => $server,
+                'item_id' => $itemId,
+                'server'  => $server,
             ]
         ]);
     }
@@ -53,8 +56,8 @@ class Market
         return Guzzle::get("/private/market/item/history", [
             RequestOptions::QUERY => [
                 'companion_access_key' => $accessKey,
-                'item_id'   => $itemId,
-                'server'    => $server,
+                'item_id' => $itemId,
+                'server'  => $server,
             ]
         ]);
     }
@@ -64,8 +67,8 @@ class Market
         return Guzzle::get("/private/market/item/update", [
             RequestOptions::QUERY => [
                 'companion_access_key' => $accessKey,
-                'item_id'   => $itemId,
-                'server'    => $server,
+                'item_id' => $itemId,
+                'server'  => $server,
             ]
         ]);
     }
