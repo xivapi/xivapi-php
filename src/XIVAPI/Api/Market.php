@@ -27,6 +27,33 @@ class Market
             RequestOptions::QUERY => $options
         ]);
     }
+    
+    public function itemPrices(string $accessKey, int $itemId, string $server)
+    {
+        return Guzzle::get("/private/market/item", [
+            RequestOptions::QUERY => [
+                'companion_access_key' => $accessKey,
+                'item_id' => $itemId,
+                'server'  => $server,
+            ]
+        ]);
+    }
+    
+    public function itemHistory(string $accessKey, int $itemId, string $server)
+    {
+        return Guzzle::get("/private/market/item/history", [
+            RequestOptions::QUERY => [
+                'companion_access_key' => $accessKey,
+                'item_id' => $itemId,
+                'server'  => $server,
+            ]
+        ]);
+    }
+    
+    public function stats()
+    {
+        return Guzzle::get("/market/stats");
+    }
 
     public function search($elasticQuery)
     {
@@ -40,28 +67,6 @@ class Market
         return Guzzle::get("/market/categories");
     }
 
-    public function itemPrices(string $accessKey, int $itemId, string $server)
-    {
-        return Guzzle::get("/private/market/item", [
-            RequestOptions::QUERY => [
-                'companion_access_key' => $accessKey,
-                'item_id' => $itemId,
-                'server'  => $server,
-            ]
-        ]);
-    }
-
-    public function itemHistory(string $accessKey, int $itemId, string $server)
-    {
-        return Guzzle::get("/private/market/item/history", [
-            RequestOptions::QUERY => [
-                'companion_access_key' => $accessKey,
-                'item_id' => $itemId,
-                'server'  => $server,
-            ]
-        ]);
-    }
-
     public function manualUpdateItem(string $accessKey, int $itemId, string $server)
     {
         return Guzzle::get("/private/market/item/update", [
@@ -72,5 +77,4 @@ class Market
             ]
         ]);
     }
-
 }
