@@ -67,11 +67,11 @@ class Market
         return Guzzle::get("/market/categories");
     }
 
-    public function manualUpdateItem(string $accessKey, int $itemId, string $server)
+    public function manualUpdateItem(string $accessKey, int $itemId, int $server)
     {
         return Guzzle::get("/private/market/item/update", [
             RequestOptions::QUERY => [
-                'companion_access_key' => $accessKey,
+                'access'  => $accessKey,
                 'item_id' => $itemId,
                 'server'  => $server,
             ]
