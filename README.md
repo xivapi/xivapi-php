@@ -137,3 +137,5 @@ $api->pvpteam->get($id, $data = []);
 $api->pvpteam->update($id);
 $api->pvpteam->delete($id);
 ```
+
+> Note: The `_private` API is for internal use within XIVAPI and MogBoard. It cannot be used publicly and is locked behind an access key.

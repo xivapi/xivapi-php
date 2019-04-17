@@ -9,6 +9,7 @@ use XIVAPI\Api\Linkshell;
 use XIVAPI\Api\Lodestone;
 use XIVAPI\Api\Market;
 use XIVAPI\Api\PatchList;
+use XIVAPI\Api\PrivateApi;
 use XIVAPI\Api\PvPTeam;
 use XIVAPI\Api\Search;
 use XIVAPI\Api\Content;
@@ -44,6 +45,8 @@ class XIVAPI
     public $market;
     /** @var PatchList */
     public $patchlist;
+    /** @var PrivateApi */
+    public $_private;
 
     public function __construct(string $environment = self::PROD)
     {
@@ -61,6 +64,7 @@ class XIVAPI
         $this->lodestone    = new Lodestone();
         $this->market       = new Market();
         $this->patchlist    = new PatchList();
+        $this->_private     = new PrivateApi();
     }
     
     public function reset(): XIVAPI
