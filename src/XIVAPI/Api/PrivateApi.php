@@ -14,7 +14,7 @@ class PrivateApi
     {
         return Guzzle::get("/private/market/item/update", [
             RequestOptions::QUERY => [
-                'companion_access_key' => $accessKey,
+                'access'  => $accessKey,
                 'item_id' => $itemId,
                 'server'  => $server,
             ]
@@ -28,7 +28,7 @@ class PrivateApi
     {
         return Guzzle::get("/private/market/item", [
             RequestOptions::QUERY => [
-                'companion_access_key' => $accessKey,
+                'access'  => $accessKey,
                 'item_id' => $itemId,
                 'server'  => $server,
             ]
@@ -42,7 +42,7 @@ class PrivateApi
     {
         return Guzzle::get("/private/market/item/history", [
             RequestOptions::QUERY => [
-                'companion_access_key' => $accessKey,
+                'access'  => $accessKey,
                 'item_id' => $itemId,
                 'server'  => $server,
             ]
