@@ -28,33 +28,11 @@ class Market
         ]);
     }
     
-    public function itemPrices(string $accessKey, int $itemId, string $server)
+    public function retainer(string $retainerId)
     {
-        return Guzzle::get("/private/market/item", [
-            RequestOptions::QUERY => [
-                'companion_access_key' => $accessKey,
-                'item_id' => $itemId,
-                'server'  => $server,
-            ]
-        ]);
+        return Guzzle::get("/market/retainer/{$retainerId}");
     }
     
-    public function itemHistory(string $accessKey, int $itemId, string $server)
-    {
-        return Guzzle::get("/private/market/item/history", [
-            RequestOptions::QUERY => [
-                'companion_access_key' => $accessKey,
-                'item_id' => $itemId,
-                'server'  => $server,
-            ]
-        ]);
-    }
-    
-    public function stats()
-    {
-        return Guzzle::get("/market/stats");
-    }
-
     public function search($elasticQuery)
     {
         return Guzzle::get("/market/search", [
@@ -65,5 +43,10 @@ class Market
     public function categories()
     {
         return Guzzle::get("/market/categories");
+    }
+    
+    public function stats()
+    {
+        return Guzzle::get("/market/stats");
     }
 }
