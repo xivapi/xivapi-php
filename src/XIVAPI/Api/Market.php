@@ -49,4 +49,9 @@ class Market
     {
         return Guzzle::get("/market/stats");
     }
+    
+    public function online()
+    {
+        return Guzzle::get("/market/online");
+    }
 }
