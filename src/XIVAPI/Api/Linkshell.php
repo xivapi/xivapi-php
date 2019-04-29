@@ -18,7 +18,7 @@ class Linkshell
         ]);
     }
 
-    public function get(int $id, array $data = [])
+    public function get($id, array $data = [])
     {
         $options = [
             RequestOptions::QUERY
@@ -31,12 +31,12 @@ class Linkshell
         return Guzzle::get("/linkshell/{$id}", $options);
     }
 
-    public function update(int $id)
+    public function update($id)
     {
         return Guzzle::get("/linkshell/{$id}/update");
     }
 
-    public function delete(int $id)
+    public function delete($id)
     {
         return Guzzle::get("/linkshell/{$id}/delete");
     }
