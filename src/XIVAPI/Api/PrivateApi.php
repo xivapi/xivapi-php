@@ -24,6 +24,20 @@ class PrivateApi
     /**
      * Request an item to be updated
      */
+    public function manualItemUpdateForce(string $accessKey, int $itemId, string $server)
+    {
+        return Guzzle::get("/private/market/item/update/requested", [
+            RequestOptions::QUERY => [
+                'access'  => $accessKey,
+                'item_id' => $itemId,
+                'server'  => $server,
+            ]
+        ]);
+    }
+    
+    /**
+     * Request an item to be updated
+     */
     public function itemPrices(string $accessKey, int $itemId, string $server)
     {
         return Guzzle::get("/private/market/item", [
