@@ -27,12 +27,7 @@ class Market
             RequestOptions::QUERY => $options
         ]);
     }
-    
-    public function retainer(string $retainerId)
-    {
-        return Guzzle::get("/market/retainer/{$retainerId}");
-    }
-    
+
     public function search($elasticQuery)
     {
         return Guzzle::get("/market/search", [

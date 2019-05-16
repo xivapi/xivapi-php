@@ -62,4 +62,34 @@ class PrivateApi
             ]
         ]);
     }
+    
+    public function retainerItems(string $accessKey, string $retainerId)
+    {
+        return Guzzle::get("/market/retainer", [
+            RequestOptions::QUERY => [
+                'access'      => $accessKey,
+                'retainer_id' => $retainerId,
+            ]
+        ]);
+    }
+    
+    public function characterHistory(string $accessKey, string $lodestoneId)
+    {
+        return Guzzle::get("/market/character", [
+            RequestOptions::QUERY => [
+                'access'       => $accessKey,
+                'lodestone_id' => $lodestoneId,
+            ]
+        ]);
+    }
+    
+    public function signatureItems(string $accessKey, string $lodestoneId)
+    {
+        return Guzzle::get("/market/signature", [
+            RequestOptions::QUERY => [
+                'access'       => $accessKey,
+                'lodestone_id' => $lodestoneId,
+            ]
+        ]);
+    }
 }
