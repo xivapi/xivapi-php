@@ -25,13 +25,11 @@ class Guzzle
      */
     private static function setClient()
     {
-        if (self::$client === null) {
-            self::$client = new Client([
-                'base_uri'  => self::$environment,
-                'timeout'   => self::TIMEOUT,
-                'verify'    => self::VERIFY,
-            ]);
-        }
+        self::$client = new Client([
+            'base_uri'  => self::$environment,
+            'timeout'   => self::TIMEOUT,
+            'verify'    => self::VERIFY,
+        ]);
     }
     
     public static function setEnvironment(string $environment): void
